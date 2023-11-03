@@ -1,0 +1,86 @@
+﻿<Window x:Class="LAB8.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:h="http://helix-toolkit.org/wpf"
+        xmlns:local="clr-namespace:LAB8"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Viewport3D Grid.Column="0">
+            <Viewport3D.Camera>
+                <PerspectiveCamera Position="6 5 4" LookDirection="-6 -5 -4" />
+            </Viewport3D.Camera>
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <DirectionalLight Direction="-1 -1 -1" />
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <GeometryModel3D>
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D
+                            Positions="0 0 0  1 0 0  0 1 0  1 1 0  0 0 1  1 0 1  0 1 1  1 1 1"  
+                            TriangleIndices="0,2,1 1,2,3 0,4,2 2,4,6
+                                             0,1,4 1,5,4 1,7,5 1,3,7
+                                             4,5,6 7,6,5 2,6,3 3,6,7"/>
+                        </GeometryModel3D.Geometry>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial x:Name="difMat">
+                                <DiffuseMaterial.Brush>
+                                    <SolidColorBrush Color="Fuchsia" />
+                                </DiffuseMaterial.Brush>
+                            </DiffuseMaterial>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.Transform>
+                            <ScaleTransform3D x:Name="scaleTransform" />
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+                </ModelVisual3D.Content>
+                <ModelVisual3D.Transform>
+                    <Transform3DGroup>
+                        <RotateTransform3D>
+                        <RotateTransform3D.Rotation>
+                            <AxisAngleRotation3D x:Name="Roate3DOjbectX" Axis="1 0 0" />
+                        </RotateTransform3D.Rotation>
+                    </RotateTransform3D>
+                    <RotateTransform3D>
+                        <RotateTransform3D.Rotation>
+                            <AxisAngleRotation3D x:Name="Roate3DOjbectY" Axis="0 1 0" />
+                        </RotateTransform3D.Rotation>
+                    </RotateTransform3D>
+                        <RotateTransform3D>
+                            <RotateTransform3D.Rotation>
+                                <AxisAngleRotation3D x:Name="Roate3DOjbectZ" Axis="0 0 1" />
+                            </RotateTransform3D.Rotation>
+                        </RotateTransform3D>
+                    </Transform3DGroup>
+                </ModelVisual3D.Transform>
+                
+            </ModelVisual3D>
+        </Viewport3D>
+        <StackPanel Grid.Column="1" Background="#FFF1EDC3">
+            <TextBlock Text="Крутить по X" VerticalAlignment="Top" FontStyle="Italic"/>
+            <Slider Minimum="0" Maximum="360" Height="20" Width="100" VerticalAlignment="Stretch" HorizontalAlignment="Left" Value="{Binding ElementName=Roate3DOjbectX, Path=Angle}"/>
+            <TextBlock Text="Крутить по Y" VerticalAlignment="Top" FontStyle="Italic"/>
+            <Slider Minimum="0" Maximum="360" Height="20" Width="100" VerticalAlignment="Stretch" HorizontalAlignment="Left" Value="{Binding ElementName=Roate3DOjbectY, Path=Angle}"/>
+            <TextBlock Text="Крутить по Z" VerticalAlignment="Top" FontStyle="Italic"/>
+            <Slider Minimum="0" Maximum="360" Height="20" Width="100" VerticalAlignment="Stretch" HorizontalAlignment="Left" Value="{Binding ElementName=Roate3DOjbectZ, Path=Angle}"/>
+            <TextBlock Text="Изменить размеры по оси X" VerticalAlignment="Top"  FontStyle="Italic"/>
+            <Slider x:Name="sliderX" LargeChange="1" Minimum="0.1" Maximum="2" Height="20" Width="100" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0,10,0,0" ValueChanged="Slider_ValueChanged" />
+            <TextBlock Text="Изменить размеры по оси Y" VerticalAlignment="Top"  FontStyle="Italic"/>
+            <Slider x:Name="sliderY" Minimum="0.1" LargeChange="1" Maximum="2" Height="20" Width="100" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0,10,0,0" ValueChanged="Slider_ValueChanged" />
+            <TextBlock Text="Изменить размеры по оси Z" VerticalAlignment="Top" FontStyle="Italic"/>
+            <Slider x:Name="sliderZ" Minimum="0.1" LargeChange="1" Maximum="2" Height="20" Width="100" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0,10,0,0" ValueChanged="Slider_ValueChanged" />
+            <Button Name="btn_mode1" Click="color_set" Content="Изменить цвет" Width="90" Height="35" VerticalAlignment="Stretch" HorizontalAlignment="Left" Background="ForestGreen" Margin="0,10,0,0"/>
+            <Button Name="btn_mode2" Click="AnimateButton_Click" Content="Анимация" Width="90" Height="35" VerticalAlignment="Stretch" HorizontalAlignment="Left" Background="ForestGreen" Margin="0,10,0,0"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>
